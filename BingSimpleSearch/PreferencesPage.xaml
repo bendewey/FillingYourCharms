@@ -1,0 +1,73 @@
+﻿<UserControl
+    x:Class="BingSimpleSearch.PreferencesPage"
+    x:Name="UserControlRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BingSimpleSearch"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Margin="0,0,-351,0">
+    
+    <Grid x:Name="LayoutRoot">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OpeningGroups">
+                <VisualState x:Name="PreferencesOpened">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Overlay">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="UserControlRoot">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>0</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="PreferencesClosed"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="351" />
+        </Grid.ColumnDefinitions>
+
+        <Rectangle x:Name="Overlay" Fill="#00FFFFFF" Visibility="Collapsed" Tapped="Overlay_Tapped" />
+
+        <Border x:Name="Pane" Grid.Column="1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
+                BorderThickness="1,0,0,0">
+            <Border.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </Border.Transitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="BackButton" Style="{StaticResource SnappedBackButtonStyle}" Click="BackButton_Click" />
+                    <TextBlock x:Name="PageTitle" Text="Preferences" Style="{StaticResource SnappedPageHeaderTextStyle}" Grid.Column="1" />
+                </Grid>
+
+                <StackPanel Grid.Row="1" Margin="16">
+                    <Button Content="Show Message" Click="Button_Click" Margin="0,20,0,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

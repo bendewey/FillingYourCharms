@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="BingSimpleSearch.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BingSimpleSearch"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+	
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+
+        <Image VerticalAlignment="Top" HorizontalAlignment="Left" Source="Assets/topLeft_bg.png" Width="50" Height="125" Grid.RowSpan="2" />
+        <Image x:Name="PoweredByLogo" VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="Assets/bingLogo_bg.png" Width="174" Height="337" Grid.Row="1" />
+
+        <Grid Margin="38">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="1" Content="Search" Click="Search_Click" />
+            
+            <ListView x:Name="ImagesList" Margin="0,18,18,0" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" ItemContainerStyle="{StaticResource ThemeColorListViewItemStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Thumbnail.MediaUrl}" Width="100" />
+                            <TextBlock Text="{Binding Title}" Margin="4" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Image Source="{Binding SelectedItem.Thumbnail.MediaUrl, ElementName=ImagesList}" />
+                <Image x:Name="FullSizeImage" Source="{Binding SelectedItem.MediaUrl, ElementName=ImagesList}" />
+            </Grid>
+        </Grid>
+        
+        <local:PreferencesPage x:Name="PreferencesPage" />
+    </Grid>
+    
+    <Page.BottomAppBar>
+        <AppBar>
+            <Button Style="{StaticResource SetTileAppBarButtonStyle}" Click="SetTile_Click" />
+        </AppBar>
+    </Page.BottomAppBar>
+</Page>
