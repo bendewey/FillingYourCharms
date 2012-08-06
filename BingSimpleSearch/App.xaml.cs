@@ -54,17 +54,5 @@ namespace BingSimpleSearch
             Window.Current.Content = _mainPage;
             Window.Current.Activate();
         }
-
-        void App_SuggestionsRequested(SearchPane sender, SearchPaneSuggestionsRequestedEventArgs args)
-        {
-            var matches = from w in Dictionary.Fruits
-                          where w.ToUpper().StartsWith(args.QueryText.ToUpper())
-                          select w;
-
-            foreach(var w in matches)
-            {
-                args.Request.SearchSuggestionCollection.AppendQuerySuggestion(w);
-            }
-        }
     }
 }

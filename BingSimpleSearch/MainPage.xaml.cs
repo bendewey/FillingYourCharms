@@ -25,11 +25,11 @@ namespace BingSimpleSearch
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private string _lastSearch;
         private SearchPane _searchPane;
         private DataTransferManager _dataTransfer;
         private PlayToManager _playToManager;
         private SettingsPane _settingsPane;
-        private string _lastSearch;
 
         public MainPage()
         {
@@ -60,7 +60,7 @@ namespace BingSimpleSearch
             _searchPane.QuerySubmitted -= QuerySubmitted;
             _dataTransfer.DataRequested -= DataRequested;
             _playToManager.SourceRequested -= SourceRequested;
-            _settingsPane.CommandsRequested += CommandsRequested;
+            _settingsPane.CommandsRequested -= CommandsRequested;
         }
 
         #region Search
